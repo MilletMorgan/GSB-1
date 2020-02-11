@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.28.2",
+    "core-js": "^3.0.0",
+    "node-sass": "^4.13.0",
+    "regenerator-runtime": "^0.13.2",
+    "sass-loader": "7.0.1",
+    "webpack-notifier": "^1.6.0"
+  },
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+    "feather-icons": "^4.25.0",
+    "jquery": "^3.4.1",
+    "sweetalert2": "^9.5.4"
+  },
+  "name": "GSB",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Millet Morgan <millet.morgan5@gmail.com>",
+  "license": "MIT"
+}
