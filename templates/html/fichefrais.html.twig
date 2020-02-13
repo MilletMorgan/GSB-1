@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche frais{% endblock %}
+
+{% block body %}
+
+	{#    {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}#}
+	<div class="form-card card container">
+
+		{{ form_start(form) }}
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					{% if form_errors((form)) %}
+						<div class="alert alert-danger">
+							{{ form_errors((form)) }}
+						</div>
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{% if form_errors((form)) %}
+						<div class="alert alert-danger">
+							{{ form_errors((form)) }}
+						</div>
+					{% endif %}
+					<div class="label">
+						{{ form_label(form.nbJustificatifs, 'Justificatifs') }}
+					</div>
+					<div class="">
+						{{ form_widget(form.nbJustificatifs) }}
+					</div>
+
+					<br>
+
+					<div class="label">
+						{{ form_label(form.montant, 'Montant') }}
+					</div>
+					<div class="">
+						{{ form_widget(form.montant) }}
+					</div>
+
+					<br>
+
+					<div class="label">
+						{{ form_label(form.dateModif, 'Date modification') }}
+					</div>
+					<div class="">
+						{{ form_widget(form.dateModif) }}
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Fiche frais</button>
+		{{ form_end(form) }}
+	</div>
+
+	{#    {% else %}#}
+
+	{#    {% endif %}#}
+
+{% endblock %}

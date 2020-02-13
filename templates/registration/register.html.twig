@@ -1,0 +1,200 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouvel utilisateur{% endblock %}
+
+{% block body %}
+
+    {# {% if is_granted(expression('"ROLE_ADMIN" in roles')) %} #}
+
+<body>
+<div class="form-card my-card container">
+	<h1 class="text-center">Créer un utilisateur</h1>
+	{{ form_start(form) }}
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label colorLabel">
+					{{ form_label(form.username, 'Pseudo') }}
+				</div>
+				<div class="">
+					{{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.email) }}
+				</div>
+				<div class="">
+					{{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.roles) }}
+				</div>
+				<div class="">
+					{{ form_widget(form.roles, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class='input-group date' id='datetimepicker1'>
+					<input type='text' class="form-control" />
+					<span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.plainPassword.first, 'Mot de passe') }}
+				</div>
+				<div class="">
+					{{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.plainPassword.second, 'Répéter le mot de passe') }}
+				</div>
+				<div class="">
+					{{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.prenom) }}
+				</div>
+				<div class="">
+					{{ form_widget(form.prenom, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.nom) }}
+				</div>
+				<div class="">
+					{{ form_widget(form.nom, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.cp, 'Code postal') }}
+				</div>
+				<div class="">
+					{{ form_widget(form.cp, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.date_embauche, "Date d'embauche") }}
+				</div>
+				<div class="">
+					{{ form_widget(form.date_embauche) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.adresse) }}
+				</div>
+				<div class="">
+					{{ form_widget(form.adresse, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{% if form_errors((form)) %}
+					<div class="alert alert-danger">
+						{{ form_errors((form)) }}
+					</div>
+				{% endif %}
+				<div class="label">
+					{{ form_label(form.ville) }}
+				</div>
+				<div class="">
+					{{ form_widget(form.ville, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-primary btn-lg btn-block btn-dark">S'enregistrer</button>
+	{{ form_end(form) }}
+	<p>
+</div>
+{#
+    {% else %}
+        <h1>Seul un administrateur peut créer un nouvel utilisateur. Veuillez vous connectez</h1>
+        <a href="{{ path('app_login') }}">Connection</a>
+    {% endif %} #}
+
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript">
+        // Mettre Ton Script Ici
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+	</script>
+{% endblock %}
