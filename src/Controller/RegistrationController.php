@@ -42,7 +42,7 @@ class RegistrationController extends AbstractController
 		}
 
 		return $this->render(
-			'registration/register.notefrais.twig',
+			'registration/register.html.twig',
 			array('form' => $form->createView())
 		);
 	}
