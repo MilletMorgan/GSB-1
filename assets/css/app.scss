@@ -1,3 +1,19 @@
-body {
-	background: blue;
+body, html {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+.sidemenu {
+	height: 100vh;
+}
+
+li {
+	list-style: none;
+}
+
+.my-card {
+	width: 130vh;
+	margin: 10vh auto;
+
 }
