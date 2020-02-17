@@ -33,7 +33,9 @@ class UserType extends AbstractType
 				'required'  => true,
 				'multiple' => true
 			))
-			->add('date_embauche', DateType::class)
+			->add('date_embauche', DateType::class, [
+				'widget' => 'single_text',
+			])
 			->add('plainPassword', RepeatedType::class, array(
 				'type' => PasswordType::class,
 				'first_options' => array('label' => 'Password'),

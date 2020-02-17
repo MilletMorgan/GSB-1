@@ -18,7 +18,9 @@ class NoteFraisType extends AbstractType
 		$builder
 			->add('nbJustificatifs', IntegerType::class)
 			->add('montant', IntegerType::class)
-			->add('dateModif', DateType::class);
+			->add('dateModif', DateType::class, [
+				'widget' => 'single_text',
+			]);
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

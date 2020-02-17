@@ -13,22 +13,71 @@
 	{% endblock %}
 </head>
 <body>
-<div class="row">
-	<div class="col-md-2 bg-dark sidemenu">
-		<a class="navbar-brand" href="#">GSB</a>
-		<ul>
-			<li><a href="{{ path('app_login') }}">Login</a></li>
-			<li><a href="{{ path('user_registration') }}">Register</a></li>
-			<li><a href="{{ path('notefrais') }}">Fiche frais</a></li>
-		</ul>
-	</div>
-	<div class="col-md-10">
-		{% block body %}{% endblock %}
+{#<div class="row">#}
+{#	<div class="col-md-2 sidemenu">#}
+{#		<h1 class="text-center"><a class="navbar-brand" href="{{ path('app_homepage') }}">GSB</a></h1>#}
+{#		<ul>#}
+{#			<li><a href="{{ path('app_login') }}">Connexion</a></li>#}
+{#			<li><a href="{{ path('user_registration') }}">Créer un utilisateur</a></li>#}
+{#			<li><a href="{{ path('notefrais') }}">Ajoutée une note de frais</a></li>#}
+{#		</ul>#}
+{#	</div>#}
+{#	<div class="col-md-10">#}
+{#		{% block body %}{% endblock %}#}
+{#	</div>#}
+{#</div>#}
+
+
+<div class="main-wrapper">
+
+	<!-- partial:partials/_sidebar.html -->
+	<nav class="sidebar">
+		<div class="sidebar-header">
+			<a href="{{ path('app_homepage') }}" class="sidebar-brand">
+				GSB
+			</a>
+		</div>
+		<div class="sidebar-body">
+			<ul class="nav">
+				<li class="nav-item">
+					<a href="{{ path('app_login') }}" class="nav-link">Connexion</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ path('user_registration') }}" class="nav-link">Créer un utilisateur</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ path('notefrais') }}" class="nav-link">Ajoutée une note de frais</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!-- partial -->
+
+	<div class="page-wrapper">
+		<div class="page-content">
+			{% block body %}{% endblock %}
+		</div>
+
+		<!-- partial:partials/_footer.html -->
+		<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
+			<p class="text-muted text-center text-md-left">Copyright © 2019 <a href="https://www.nobleui.com"
+																			   target="_blank">NobleUI</a>. All rights
+				reserved</p>
+			<p class="text-muted text-center text-md-left mb-0 d-none d-md-block">Handcrafted With <i
+						class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i></p>
+		</footer>
+		<!-- partial -->
+
 	</div>
 </div>
 
+
 {% block javascripts %}
 	{{ encore_entry_script_tags('app') }}
+	<script
+			src="https://code.jquery.com/jquery-3.4.1.min.js"
+			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			crossorigin="anonymous"></script>
 {% endblock %}
 </body>
 </html>

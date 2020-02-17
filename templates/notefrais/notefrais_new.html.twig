@@ -5,11 +5,14 @@
 {% block body %}
 
 	{#    {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}#}
-	<div class="form-card card container">
+	<div class="card my-card">
+		<div class="card-body">
 
-		{{ form_start(form) }}
-		<div class="row">
-			<div class="col-md-6">
+			<div class="form-card container">
+				<h3>Note de frais</h3>
+
+				{{ form_start(form) }}
+
 				<div class="form-group">
 					{% if form_errors((form)) %}
 						<div class="alert alert-danger">
@@ -24,37 +27,26 @@
 							{{ form_errors((form)) }}
 						</div>
 					{% endif %}
-					<div class="label">
+					<div class="form-group">
 						{{ form_label(form.nbJustificatifs, 'Justificatifs') }}
-					</div>
-					<div class="">
-						{{ form_widget(form.nbJustificatifs) }}
+						{{ form_widget(form.nbJustificatifs, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 
-					<br>
-
-					<div class="label">
+					<div class="form-group">
 						{{ form_label(form.montant, 'Montant') }}
-					</div>
-					<div class="">
-						{{ form_widget(form.montant) }}
+						{{ form_widget(form.montant, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 
-					<br>
-
-					<div class="label">
+					<div class="form-group">
 						{{ form_label(form.dateModif, 'Date modification') }}
-					</div>
-					<div class="">
-						{{ form_widget(form.dateModif) }}
+						{{ form_widget(form.dateModif, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 				</div>
 
+				<button type="submit" class="btn btn-primary">Fiche frais</button>
+				{{ form_end(form) }}
 			</div>
 		</div>
-
-		<button type="submit" class="btn btn-primary">Fiche frais</button>
-		{{ form_end(form) }}
 	</div>
 
 	{#    {% else %}#}
