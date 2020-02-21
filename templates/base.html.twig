@@ -43,7 +43,7 @@
 					<a href="{{ path('app_login') }}" class="nav-link">Connexion</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{ path('user_registration') }}" class="nav-link">Créer un utilisateur</a>
+					<a href="{{ path('user_new') }}" class="nav-link">Créer un utilisateur</a>
 				</li>
 				<li class="nav-item">
 					<a href="{{ path('notefrais') }}" class="nav-link">Ajoutée une note de frais</a>
@@ -57,17 +57,6 @@
 		<div class="page-content">
 			{% block body %}{% endblock %}
 		</div>
-
-		<!-- partial:partials/_footer.html -->
-		<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
-			<p class="text-muted text-center text-md-left">Copyright © 2019 <a href="https://www.nobleui.com"
-																			   target="_blank">NobleUI</a>. All rights
-				reserved</p>
-			<p class="text-muted text-center text-md-left mb-0 d-none d-md-block">Handcrafted With <i
-						class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i></p>
-		</footer>
-		<!-- partial -->
-
 	</div>
 </div>
 
