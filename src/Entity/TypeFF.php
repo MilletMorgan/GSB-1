@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,16 @@ class TypeFF
      * @ORM\Column(type="integer")
      */
     private $montant;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneFF", mappedBy="typeFF")
+     */
+    private $ligneFFs;
+
+    public function __construct()
+    {
+        $this->ligneFFs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -51,6 +63,37 @@ class TypeFF
     public function setMontant(int $montant): self
     {
         $this->montant = $montant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LigneFF[]
+     */
+    public function getLigneFFs(): Collection
+    {
+        return $this->ligneFFs;
+    }
+
+    public function addLigneFF(LigneFF $ligneFF): self
+    {
+        if (!$this->ligneFFs->contains($ligneFF)) {
+            $this->ligneFFs[] = $ligneFF;
+            $ligneFF->setTypeFF($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigneFF(LigneFF $ligneFF): self
+    {
+        if ($this->ligneFFs->contains($ligneFF)) {
+            $this->ligneFFs->removeElement($ligneFF);
+            // set the owning side to null (unless already changed)
+            if ($ligneFF->getTypeFF() === $this) {
+                $ligneFF->setTypeFF(null);
+            }
+        }
 
         return $this;
     }

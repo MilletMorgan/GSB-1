@@ -31,6 +31,16 @@ class LigneHF
      */
     private $montant;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Fiche", inversedBy="ligneHF")
+     */
+    private $fiche;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="ligneHF")
+     */
+    private $etat;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +78,30 @@ class LigneHF
     public function setMontant(int $montant): self
     {
         $this->montant = $montant;
+
+        return $this;
+    }
+
+    public function getFiche(): ?Fiche
+    {
+        return $this->fiche;
+    }
+
+    public function setFiche(?Fiche $fiche): self
+    {
+        $this->fiche = $fiche;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

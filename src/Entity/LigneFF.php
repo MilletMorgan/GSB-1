@@ -26,6 +26,26 @@ class LigneFF
      */
     private $quantite;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Fiche", inversedBy="ligneFF")
+     */
+    private $fiche;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="ligneFF")
+     */
+    private $etat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\typeFF", inversedBy="ligneFFs")
+     */
+    private $typeFF;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\fraisForfait", inversedBy="ligneFFs")
+     */
+    private $fraisForfait;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +71,54 @@ class LigneFF
     public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getFiche(): ?Fiche
+    {
+        return $this->fiche;
+    }
+
+    public function setFiche(?Fiche $fiche): self
+    {
+        $this->fiche = $fiche;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getTypeFF(): ?typeFF
+    {
+        return $this->typeFF;
+    }
+
+    public function setTypeFF(?typeFF $typeFF): self
+    {
+        $this->typeFF = $typeFF;
+
+        return $this;
+    }
+
+    public function getFraisForfait(): ?fraisForfait
+    {
+        return $this->fraisForfait;
+    }
+
+    public function setFraisForfait(?fraisForfait $fraisForfait): self
+    {
+        $this->fraisForfait = $fraisForfait;
 
         return $this;
     }
