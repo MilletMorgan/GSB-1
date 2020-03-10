@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ noteFrais.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre de Justificatif</th>
+                <td>{{ noteFrais.nbJustificatifs }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ noteFrais.montant }}</td>
+            </tr>
+            <tr>
+                <th>Date de Modification</th>
+                <td>{{ noteFrais.dateModif|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>User ID</th>
+                <td>{{ noteFrais.userId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

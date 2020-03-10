@@ -28,6 +28,9 @@ class NoteFraisController extends AbstractController
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
+			/** @var User $user */
+			$user = $this->getUser();
+			$noteFrais->setUserId(intval($user->getId()));
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($noteFrais);
 			$entityManager->flush();
@@ -48,7 +51,7 @@ class NoteFraisController extends AbstractController
 	public function edit($id, NoteFraisRepository $noteFraisRepository, Request $request)
 	{
 		$noteFrais = $noteFraisRepository->find($id);
-		$form = $this->createForm(NoteFrais::class, $noteFrais);
+		$form = $this->createForm(NoteFraisType::class, $noteFrais);
 
 		if (!$noteFrais)
 		{
@@ -59,7 +62,8 @@ class NoteFraisController extends AbstractController
 
 		$form->handleRequest($request);
 
-		if ($form->isSubmitted() && $form->isValid()) {
+		if ($form->isSubmitted() && $form->isValid()) 
+		{
 			$noteFrais = $form->getData();
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($noteFrais);
@@ -68,5 +72,41 @@ class NoteFraisController extends AbstractController
 		}
 
 		return $this->render('notefrais/notefrais_edit.html.twig', ['form'=>$form->createView()]);
+	}
+	
+	/**
+	 * @Route("/showNoteFrais/{id}", name="showNoteFrais")
+	 * @param $id
+	 */
+	public function show($id)
+	{
+		$noteFrais = $this->getDoctrine()->getRepository(NoteFrais::class)->find($id);
+
+		if (!$noteFrais)
+		{
+			throw $this->createNotFoundException(
+				'Note de frais introuvable pour '.$id
+			);
+		}
+		return $this->render('notefrais/notefrais_show.html.twig',['noteFrais'=>$noteFrais]);
+	}
+		/**
+	 * @Route("/deleteNoteFrais/{id}", name="deleteNoteFrais")
+	 * @param $id
+	 */
+	public function delete($id)
+	{
+		$noteFrais = $this->getDoctrine()->getRepository(NoteFrais::class)->find($id);
+
+		if (!$noteFrais)
+		{
+			throw $this->createNotFoundException(
+				'Note de frais introuvable pour '.$id
+			);
+		}
+		$entityManager->remove($noteFrais);
+		$entityManager->flush();
+
+		return $this->redirectToRoute('app_login');
 	}
 }

@@ -2,6 +2,55 @@
 
 {% block body %}
 
+	{#    {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}#}
+	<div class="card my-card">
+		<div class="card-body">
+
+			<div class="form-card container">
+				<h3>Note de frais</h3>
+
+				{{ form_start(form) }}
+
+				<div class="form-group">
+					{% if form_errors((form)) %}
+						<div class="alert alert-danger">
+							{{ form_errors((form)) }}
+						</div>
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{% if form_errors((form)) %}
+						<div class="alert alert-danger">
+							{{ form_errors((form)) }}
+						</div>
+					{% endif %}
+					<div class="form-group">
+						{{ form_label(form.nbJustificatifs, 'Justificatifs') }}
+						{{ form_widget(form.nbJustificatifs, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.montant, 'Montant') }}
+						{{ form_widget(form.montant, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.dateModif, 'Date modification') }}
+						{{ form_widget(form.dateModif, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Fiche frais</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+
+	{#    {% else %}#}
+
+	{#    {% endif %}#}
+
 {% endblock %}
 
 {% block title %}
