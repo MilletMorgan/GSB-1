@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LigneHFRepository")
  */
-class LigneHF
+class LigneHf
 {
     /**
      * @ORM\Id()
@@ -32,12 +32,12 @@ class LigneHF
     private $montant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Fiche", inversedBy="ligneHF")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Fiche", inversedBy="ligneHf")
      */
     private $fiche;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="ligneHF")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="ligneHf")
      */
     private $etat;
 

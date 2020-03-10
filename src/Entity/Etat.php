@@ -34,20 +34,20 @@ class Etat
     private $fiches;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ligneHF", mappedBy="etat")
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneHf", mappedBy="etat")
      */
-    private $ligneHF;
+    private $ligneHf;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ligneFF", mappedBy="etat")
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneFf", mappedBy="etat")
      */
-    private $ligneFF;
+    private $ligneFf;
 
     public function __construct()
     {
         $this->fiches = new ArrayCollection();
-        $this->ligneHF = new ArrayCollection();
-        $this->ligneFF = new ArrayCollection();
+        $this->ligneHf = new ArrayCollection();
+        $this->ligneFf = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,30 +111,30 @@ class Etat
     }
 
     /**
-     * @return Collection|ligneHF[]
+     * @return Collection|LigneHf[]
      */
     public function getLigneHF(): Collection
     {
-        return $this->ligneHF;
+        return $this->ligneHf;
     }
 
-    public function addLigneHF(ligneHF $ligneHF): self
+    public function addLigneHF(LigneHf $ligneHf): self
     {
-        if (!$this->ligneHF->contains($ligneHF)) {
-            $this->ligneHF[] = $ligneHF;
-            $ligneHF->setEtat($this);
+        if (!$this->ligneHf->contains($ligneHf)) {
+            $this->ligneHf[] = $ligneHf;
+            $ligneHf->setEtat($this);
         }
 
         return $this;
     }
 
-    public function removeLigneHF(ligneHF $ligneHF): self
+    public function removeLigneHF(LigneHf $ligneHf): self
     {
-        if ($this->ligneHF->contains($ligneHF)) {
-            $this->ligneHF->removeElement($ligneHF);
+        if ($this->ligneHf->contains($ligneHf)) {
+            $this->ligneHf->removeElement($ligneHf);
             // set the owning side to null (unless already changed)
-            if ($ligneHF->getEtat() === $this) {
-                $ligneHF->setEtat(null);
+            if ($ligneHf->getEtat() === $this) {
+                $ligneHf->setEtat(null);
             }
         }
 
@@ -142,30 +142,30 @@ class Etat
     }
 
     /**
-     * @return Collection|ligneFF[]
+     * @return Collection|LigneFf[]
      */
     public function getLigneFF(): Collection
     {
-        return $this->ligneFF;
+        return $this->ligneFf;
     }
 
-    public function addLigneFF(ligneFF $ligneFF): self
+    public function addLigneFF(LigneFf $ligneFf): self
     {
-        if (!$this->ligneFF->contains($ligneFF)) {
-            $this->ligneFF[] = $ligneFF;
-            $ligneFF->setEtat($this);
+        if (!$this->ligneFf->contains($ligneFf)) {
+            $this->ligneFf[] = $ligneFf;
+            $ligneFf->setEtat($this);
         }
 
         return $this;
     }
 
-    public function removeLigneFF(ligneFF $ligneFF): self
+    public function removeLigneFF(LigneFf $ligneFf): self
     {
-        if ($this->ligneFF->contains($ligneFF)) {
-            $this->ligneFF->removeElement($ligneFF);
+        if ($this->ligneFf->contains($ligneFf)) {
+            $this->ligneFf->removeElement($ligneFf);
             // set the owning side to null (unless already changed)
-            if ($ligneFF->getEtat() === $this) {
-                $ligneFF->setEtat(null);
+            if ($ligneFf->getEtat() === $this) {
+                $ligneFf->setEtat(null);
             }
         }
 

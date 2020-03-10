@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\LigneFF;
+use App\Entity\LigneFf;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method LigneFF|null find($id, $lockMode = null, $lockVersion = null)
- * @method LigneFF|null findOneBy(array $criteria, array $orderBy = null)
- * @method LigneFF[]    findAll()
- * @method LigneFF[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method LigneFf|null find($id, $lockMode = null, $lockVersion = null)
+ * @method LigneFf|null findOneBy(array $criteria, array $orderBy = null)
+ * @method LigneFf[]    findAll()
+ * @method LigneFf[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class LigneFFRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, LigneFF::class);
+        parent::__construct($registry, LigneFf::class);
     }
 
     // /**
-    //  * @return LigneFF[] Returns an array of LigneFF objects
+    //  * @return LigneFf[] Returns an array of LigneFf objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class LigneFFRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?LigneFF
+    public function findOneBySomeField($value): ?LigneFf
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')
