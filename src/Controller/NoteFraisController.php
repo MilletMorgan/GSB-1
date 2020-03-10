@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\NoteFrais;
 use App\Entity\User;
 use App\Form\NoteFraisType;
+use App\Repository\NoteFraisRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,9 +28,6 @@ class NoteFraisController extends AbstractController
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
-			/** @var User $user */
-			$user = $this->getUser();
-			$noteFrais->setUserId(intval($user->getId()));
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($noteFrais);
 			$entityManager->flush();
@@ -38,5 +36,37 @@ class NoteFraisController extends AbstractController
 		}
 
 		return $this->render('notefrais/notefrais_new.html.twig', array('form' => $form->createView()));
+	}
+
+	/**
+	 * @Route("/editNoteFrais/{id}", name="editNoteFrais")
+	 * @param $id
+	 * @param NoteFraisRepository $noteFraisRepository
+	 * @param Request $request
+	 * @return RedirectResponse|Response
+	 */
+	public function edit($id, NoteFraisRepository $noteFraisRepository, Request $request)
+	{
+		$noteFrais = $noteFraisRepository->find($id);
+		$form = $this->createForm(NoteFrais::class, $noteFrais);
+
+		if (!$noteFrais)
+		{
+			throw $this->createNotFoundException(
+				'Note de frais introuvable pour '.$id
+			);
+		}
+
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+			$noteFrais = $form->getData();
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->persist($noteFrais);
+			$entityManager->flush();
+			return $this->redirectToRoute('app_login');
+		}
+
+		return $this->render('notefrais/notefrais_edit.html.twig', ['form'=>$form->createView()]);
 	}
 }

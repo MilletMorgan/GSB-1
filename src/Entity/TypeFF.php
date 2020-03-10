@@ -29,7 +29,7 @@ class TypeFF
     private $montant;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\LigneFF", mappedBy="typeFF")
+     * @ORM\OneToMany(targetEntity="LigneFf.php", mappedBy="typeFF")
      */
     private $ligneFFs;
 
@@ -68,14 +68,14 @@ class TypeFF
     }
 
     /**
-     * @return Collection|LigneFF[]
+     * @return Collection|LigneFf[]
      */
     public function getLigneFFs(): Collection
     {
         return $this->ligneFFs;
     }
 
-    public function addLigneFF(LigneFF $ligneFF): self
+    public function addLigneFF(LigneFf $ligneFF): self
     {
         if (!$this->ligneFFs->contains($ligneFF)) {
             $this->ligneFFs[] = $ligneFF;
@@ -85,7 +85,7 @@ class TypeFF
         return $this;
     }
 
-    public function removeLigneFF(LigneFF $ligneFF): self
+    public function removeLigneFF(LigneFf $ligneFF): self
     {
         if ($this->ligneFFs->contains($ligneFF)) {
             $this->ligneFFs->removeElement($ligneFF);

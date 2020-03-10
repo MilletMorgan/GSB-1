@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LigneFFRepository")
  */
-class LigneFF
+class LigneFf
 {
     /**
      * @ORM\Id()
@@ -27,22 +27,22 @@ class LigneFF
     private $quantite;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Fiche", inversedBy="ligneFF")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Fiche", inversedBy="ligneFf")
      */
     private $fiche;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="ligneFF")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="ligneFf")
      */
     private $etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\typeFF", inversedBy="ligneFFs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeFF", inversedBy="ligneFfs")
      */
     private $typeFF;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\fraisForfait", inversedBy="ligneFFs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\FraisForfait", inversedBy="ligneFfs")
      */
     private $fraisForfait;
 
