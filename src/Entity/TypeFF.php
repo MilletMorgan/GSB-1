@@ -29,13 +29,13 @@ class TypeFF
     private $montant;
 
     /**
-     * @ORM\OneToMany(targetEntity="LigneFf.php", mappedBy="typeFF")
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneFf", mappedBy="typeFF")
      */
-    private $ligneFFs;
+    private $ligneFf;
 
     public function __construct()
     {
-        $this->ligneFFs = new ArrayCollection();
+        $this->ligneFf = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,15 +70,15 @@ class TypeFF
     /**
      * @return Collection|LigneFf[]
      */
-    public function getLigneFFs(): Collection
+    public function getLigneFf(): Collection
     {
-        return $this->ligneFFs;
+        return $this->ligneFf;
     }
 
     public function addLigneFF(LigneFf $ligneFF): self
     {
-        if (!$this->ligneFFs->contains($ligneFF)) {
-            $this->ligneFFs[] = $ligneFF;
+        if (!$this->ligneFf->contains($ligneFF)) {
+            $this->ligneFf[] = $ligneFF;
             $ligneFF->setTypeFF($this);
         }
 
@@ -87,8 +87,8 @@ class TypeFF
 
     public function removeLigneFF(LigneFf $ligneFF): self
     {
-        if ($this->ligneFFs->contains($ligneFF)) {
-            $this->ligneFFs->removeElement($ligneFF);
+        if ($this->ligneFf->contains($ligneFF)) {
+            $this->ligneFf->removeElement($ligneFF);
             // set the owning side to null (unless already changed)
             if ($ligneFF->getTypeFF() === $this) {
                 $ligneFF->setTypeFF(null);

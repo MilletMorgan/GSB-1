@@ -29,14 +29,9 @@ class FraisForfait
     private $prix;
 
     /**
-     * @ORM\OneToMany(targetEntity="LigneFf.php", mappedBy="fraisForfait")
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneFf", mappedBy="fraisForfait")
      */
-    private $ligneFFs;
-
-    public function __construct()
-    {
-        $this->ligneFFs = new ArrayCollection();
-    }
+    private $ligneFf;
 
     public function getId(): ?int
     {
@@ -70,15 +65,15 @@ class FraisForfait
     /**
      * @return Collection|LigneFf[]
      */
-    public function getLigneFFs(): Collection
+    public function getLigneFf(): Collection
     {
-        return $this->ligneFFs;
+        return $this->ligneFf;
     }
 
     public function addLigneFF(LigneFf $ligneFF): self
     {
-        if (!$this->ligneFFs->contains($ligneFF)) {
-            $this->ligneFFs[] = $ligneFF;
+        if (!$this->ligneFf->contains($ligneFF)) {
+            $this->ligneFf[] = $ligneFF;
             $ligneFF->setFraisForfait($this);
         }
 
@@ -87,8 +82,8 @@ class FraisForfait
 
     public function removeLigneFF(LigneFf $ligneFF): self
     {
-        if ($this->ligneFFs->contains($ligneFF)) {
-            $this->ligneFFs->removeElement($ligneFF);
+        if ($this->ligneFf->contains($ligneFF)) {
+            $this->ligneFf->removeElement($ligneFF);
             // set the owning side to null (unless already changed)
             if ($ligneFF->getFraisForfait() === $this) {
                 $ligneFF->setFraisForfait(null);

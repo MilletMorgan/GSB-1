@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{#    {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}#}
+	<div class="card my-card">
+		<div class="card-body">
+
+			<div class="form-card container">
+				<h3>Ligne Hors Forfait</h3>
+
+				{{ form_start(form) }}
+
+				<div class="form-group">
+					{% if form_errors((form)) %}
+						<div class="alert alert-danger">
+							{{ form_errors((form)) }}
+						</div>
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{% if form_errors((form)) %}
+						<div class="alert alert-danger">
+							{{ form_errors((form)) }}
+						</div>
+					{% endif %}
+					<div class="form-group">
+						{{ form_label(form.dateFrais, 'Date fiche frais') }}
+						{{ form_widget(form.dateFrais, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.label, 'Label') }}
+						{{ form_widget(form.label, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.montant, 'Montant') }}
+						{{ form_widget(form.montant, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Valider</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

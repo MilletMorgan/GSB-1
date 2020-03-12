@@ -6,9 +6,14 @@
       <w>frais</w>
       <w>justificatifs</w>
       <w>ligne</w>
+      <w>ligneff</w>
+      <w>lignehf</w>
       <w>modif</w>
       <w>montant</w>
       <w>notefrais</w>
+      <w>prix</w>
+      <w>quantite</w>
+      <w>valider</w>
     </words>
   </dictionary>
 </component>

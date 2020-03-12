@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,14 +38,19 @@ class LigneFf
     private $etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TypeFF", inversedBy="ligneFfs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeFF", inversedBy="ligneFf")
      */
     private $typeFF;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FraisForfait", inversedBy="ligneFfs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\FraisForfait", inversedBy="ligneFf")
      */
     private $fraisForfait;
+
+	public function __construct()
+	{
+		$this->fraisForfait = new ArrayCollection();
+	}
 
     public function getId(): ?int
     {
@@ -111,7 +117,7 @@ class LigneFf
         return $this;
     }
 
-    public function getFraisForfait(): ?fraisForfait
+    public function getFraisForfait(): ArrayCollection
     {
         return $this->fraisForfait;
     }
