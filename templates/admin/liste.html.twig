@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %} Admin {% endblock %}
+{% block body %}
+    <div class="list-group">
+        <a  class="list-group-item active" style="font-weight: bold;">Liste des utilisateurs</a>
+        {% for User in Users %}
+        <a  class="list-group-item">{{ User.nom }}</a>
+        {% endfor %}
+
+    </div>
+    {% endblock %}
