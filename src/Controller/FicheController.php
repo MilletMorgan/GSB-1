@@ -25,17 +25,15 @@ class FicheController extends AbstractController
         $ficheFrais = $ficheFraisRepository->find($id);
         $form = $this->createForm(FicheFraisType::class, $ficheFrais);
 
-        if (!$ficheFrais)
-        {
+        if (!$ficheFrais) {
             throw $this->createNotFoundException(
-                'Fiche de frais introuvable pour '.$id
+                'Fiche de frais introuvable pour ' . $id
             );
         }
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $ficheFrais = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ficheFrais);
@@ -43,7 +41,7 @@ class FicheController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('fichefrais/fichefrais_edit.html.twig', ['form'=>$form->createView()]);
+        return $this->render('fichefrais/fichefrais_edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -55,13 +53,12 @@ class FicheController extends AbstractController
     {
         $ficheFrais = $this->getDoctrine()->getRepository(FicheFrais::class)->find($id);
 
-        if (!$ficheFrais)
-        {
+        if (!$ficheFrais) {
             throw $this->createNotFoundException(
-                'Fiche de frais introuvable pour '.$id
+                'Fiche de frais introuvable pour ' . $id
             );
         }
-        return $this->render('fichefrais/fichefrais_show.html.twig',['ficheFrais'=>$ficheFrais]);
+        return $this->render('fichefrais/fichefrais_show.html.twig', ['ficheFrais' => $ficheFrais]);
     }
 
     /**
@@ -73,14 +70,16 @@ class FicheController extends AbstractController
     {
         $ficheFrais = $this->getDoctrine()->getRepository(FicheFrais::class)->find($id);
 
-        if (!$ficheFrais)
-        {
+        if (!$ficheFrais) {
             throw $this->createNotFoundException(
-                'Fiche de frais introuvable pour '.$id
+                'Fiche de frais introuvable pour ' . $id
             );
         }
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($ficheFrais);
         $entityManager->flush();
 
+        return $this->redirect('app_homepage');
+
+    }
 }
