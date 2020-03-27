@@ -83,6 +83,4 @@ class FicheController extends AbstractController
         $entityManager->remove($ficheFrais);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_login');
-    }
 }
