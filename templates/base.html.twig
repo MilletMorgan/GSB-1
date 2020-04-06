@@ -11,6 +11,8 @@
 			  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 			  crossorigin="anonymous">
 	{% endblock %}
+
+
 </head>
 <body>
 {#<div class="row">#}
@@ -19,7 +21,7 @@
 {#		<ul>#}
 {#			<li><a href="{{ path('app_login') }}">Connexion</a></li>#}
 {#			<li><a href="{{ path('user_registration') }}">Créer un utilisateur</a></li>#}
-{#			<li><a href="{{ path('notefrais') }}">Ajoutée une note de frais</a></li>#}
+{#			<li><a href="{{ path('fichefrais') }}">Ajoutée une note de frais</a></li>#}
 {#		</ul>#}
 {#	</div>#}
 {#	<div class="col-md-10">#}
@@ -46,9 +48,6 @@
 					<a href="{{ path('user_new') }}" class="nav-link">Créer un utilisateur</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{ path('notefrais') }}" class="nav-link">Ajoutée une note de frais</a>
-				</li>
-				<li class="nav-item">
 					<a href="{{ path('ligneff') }}" class="nav-link">Ligne frais forfait</a>
 				</li>
 				<li class="nav-item">
@@ -65,14 +64,13 @@
 		</div>
 	</div>
 </div>
-
-
 {% block javascripts %}
 	{{ encore_entry_script_tags('app') }}
 	<script
 			src="https://code.jquery.com/jquery-3.4.1.min.js"
 			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			crossorigin="anonymous"></script>
+			crossorigin="anonymous">
+	</script>
 {% endblock %}
 </body>
 </html>

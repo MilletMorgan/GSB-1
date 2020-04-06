@@ -42,9 +42,12 @@
 						{{ form_widget(form.typeFF, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 
-					{% for frais in form.fraisForfait %}
-						{{ form_row(frais.label) }}
-					{% endfor %}
+
+					<div class="fiche form-group"
+						 data-prototype="{{ form_widget(form.fraisForfait.vars.prototype)|e('html_attr') }}">
+					</div>
+
+
 				</div>
 
 				<button type="submit" class="btn btn-primary">Valider</button>
@@ -57,4 +60,59 @@
 
 	{#    {% endif %}#}
 
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+        $(document).ready(function () {
+
+            function button() {
+                let $collectionHolder;
+                const $newFraisForfait = $('<div class="text-center"></div>');
+
+                $collectionHolder = $('div.fiche');
+
+                console.log($collectionHolder);
+
+                $collectionHolder.append($newFraisForfait);
+
+                $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+                // $addCardButton.on('click', function (e) {
+                //     $(this).addClass('animated').addClass('slideInDown');
+                //     setTimeout(function () {
+                //         $(this).removeClass('slideInDown');
+                //     }, 1000);
+
+                addFraisForfait($collectionHolder, $newFraisForfait);
+
+                //     $('.add_phase_link').prop('disabled', true);
+                //     $('.btn-new-question').prop('disabled', false);
+                //
+                // })
+            }
+
+            function addFraisForfait($collectionHolder, $newFraisForfait) {
+                // Get the data-prototype explained earlier
+                const prototype = $collectionHolder.data('prototype');
+                // get the new index
+                const index = $collectionHolder.data('index');
+                let newForm = prototype;
+
+                newForm = newForm.replace(/__name__/g, index);
+
+                $collectionHolder.data('index', index + 1);
+
+                // newForm.after('<div class="form-group">');
+
+                const $newFormFraisForfait = $('<div id="fraitforfait" class="form-group"></div>').append(newForm);
+                $newFraisForfait.before($newFormFraisForfait);
+
+                console.log("test : ", $('#fraitforfait').find(':input'))
+            }
+
+            button();
+        })
+	</script>
 {% endblock %}

@@ -11,18 +11,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FraisForfaitType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('label')
-            ->add('prix')
-        ;
-    }
+	public function buildForm(FormBuilderInterface $builder, array $options)
+	{
+		$builder
+			->add('label', null, array(
+				'attr' => array(
+					'class' => 'form-control'
+				)
+			))
+			->add('prix', null, array(
+				'attr' => array(
+					'class' => 'form-control'
+				)
+			));
+	}
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => FraisForfait::class,
-        ]);
-    }
+	public function configureOptions(OptionsResolver $resolver)
+	{
+		$resolver->setDefaults([
+			'data_class' => FraisForfait::class,
+		]);
+	}
 }
