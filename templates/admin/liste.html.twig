@@ -28,7 +28,7 @@
             <td>{{ User.email }}</td>
             <td>{{ User.roles ? User.roles|join(', ') : '' }}</td>
             <td><a type="button" class="btn btn-secondary" href="{{ path('editUser', {userId:User.id}) }}">Editer</a>
-            <a type="button" class="btn btn-secondary" href="#">Supprimer</a></td>
+            <a type="button" class="btn btn-secondary" href="{{ path('deleteUser', {id:User.id} ) }}">Supprimer</a></td>
 
         </tr>
         {% endfor %}
