@@ -28,25 +28,26 @@ class LigneFfController extends AbstractController
         $form = $this->createForm(LigneFfType::class, $ligneff);
         $form->handleRequest($request);
 
-        $ficheRepository = $this->getDoctrine()->getRepository(Fiche::class);
-        $fiche = $ficheRepository->findOneBy([
-            'mois' => date('m'),
-            'annee' => date('Y'),
-        ]);
-
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($this->getUser()->getId());
 
+        $ficheRepository = $this->getDoctrine()->getRepository(Fiche::class);
+        $fiche = $ficheRepository->findOneBy([
+            'mois' => date('m'),
+            'annee' => date('Y'),
+            'user' => $user
+        ]);
+
         $etat = $this->getDoctrine()->getRepository(Etat::class)->findOneBy([
-            'ordre' => 1
+            'id' => 1
         ]);
 
         $entityManager = $this->getDoctrine()->getManager();
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $date_frais = $form->get('dateFFrais')->getData()->format('Y-m-d');;
+            $date_frais = $form->get('dateFFrais')->getData()->format('Y-m-d');
 
             if ($date_frais <= date("Y-m-d") and strtotime($date_frais) >= (strtotime(date('Y-m-d') . "-365 days"))) {
                 $this->addFlash(
@@ -56,7 +57,6 @@ class LigneFfController extends AbstractController
 
                 if ($fiche) {
                     $ligneff->setFiche($fiche);
-                    $ligneff->setFiche($fiche);
                     $ligneff->setEtat($etat);
                 } else {
                     $newFiche = new Fiche();
@@ -65,6 +65,9 @@ class LigneFfController extends AbstractController
                     $newFiche->setUser($user);
                     $newFiche->setMois(date('m'));
                     $newFiche->setAnnee(date('Y'));
+
+                    $ligneff->setFiche($newFiche);
+                    $ligneff->setEtat($etat);
 
                     $entityManager->persist($newFiche);
                     $entityManager->flush();

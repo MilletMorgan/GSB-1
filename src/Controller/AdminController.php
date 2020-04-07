@@ -4,16 +4,20 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\UserType;
 
-
+/**
+ * @Route("/admin")
+ */
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/", name="admin")
      */
     public function index()
     {
@@ -23,11 +27,12 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/adminListe", name="admin1")
+     * @Route("/liste", name="adminliste")
      */
-    public function admin1(){
+    public function adminListe(){
         $repository = $this->getDoctrine()->getRepository(User::class);
         $User = $repository->findAll();
+
         return $this->render('admin/liste.html.twig', array(
             'Users' => $User
         ));
@@ -35,9 +40,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user/{userId}", name="editUser")
-     * @param $id
+     * @Route("/edit/{userId}", name="editUser")
+     * @param $userId
+     * @param UserRepository $userRepository
      * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function edit($userId, UserRepository $userRepository, Request $request)
     {
@@ -66,7 +73,9 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/supprUser/{id}", name="deleteUser")
+     * @Route("/delete/{id}", name="deleteUser")
+     * @param $id
+     * @return RedirectResponse
      */
     public function delete($id)
     {
@@ -76,6 +85,6 @@ class AdminController extends AbstractController
         $entityManager->remove($User);
         $entityManager->flush();
 
-        return $this->redirect($this->generateUrl('admin/liste.html.twig'));
+        return $this->redirect($this->generateUrl('adminliste'));
     }
 }

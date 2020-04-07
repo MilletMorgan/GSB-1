@@ -27,7 +27,8 @@ class UserType extends AbstractType
 			->add('cp', TextType::class)
 			->add('roles', ChoiceType::class, array(
 				'choices'  => array(
-					'Client' => 'ROLE_USER',
+					'Visiteur' => 'ROLE_VISITEUR',
+					'Comptable' => 'ROLE_COMPTABLE',
 					'Administrateur' => 'ROLE_ADMIN',
 				),
 				'required'  => true,

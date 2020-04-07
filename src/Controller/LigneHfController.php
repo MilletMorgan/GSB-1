@@ -39,37 +39,40 @@ class LigneHfController extends AbstractController
         $form = $this->createForm(LigneHfType::class, $lignehf);
         $form->handleRequest($request);
 
-        $ficheRepository = $this->getDoctrine()->getRepository(Fiche::class);
-        $fiche = $ficheRepository->findOneBy([
-            'mois' => date('m'),
-            'annee' => date('Y'),
-        ]);
-
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($this->getUser()->getId());
 
+        $ficheRepository = $this->getDoctrine()->getRepository(Fiche::class);
+
+        // Récupère les fiches avec la même date qu'aujourd'hui & même utilisateur liée à la fiche
+        $fiche = $ficheRepository->findOneBy([
+            'mois' => date('m'),
+            'annee' => date('Y'),
+            'user' => $user
+        ]);
+
         $etat = $this->getDoctrine()->getRepository(Etat::class)->findOneBy([
-            'ordre' => 1
+            'id' => 1
         ]);
 
         $entityManager = $this->getDoctrine()->getManager();
 
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $date_frais = $form->get('dateFrais')->getData()->format('Y-m-d');;
+            $date_frais = $form->get('dateFrais')->getData()->format('Y-m-d');
 
+            //*permet de comparer la date du jour avec la date de la ligne frais saisie pour empecher une date supperieur à celle du jour
             if ($date_frais <= date("Y-m-d") and strtotime($date_frais) >= (strtotime(date('Y-m-d') . "-365 days"))) {
                 $this->addFlash(
                     'success',
                     "La note de frais à bien été ajoutée !"
                 );
 
+                // Si la fiche existe on donne à lignehf la fiche et l'état existant
                 if ($fiche) {
                     $lignehf->setFiche($fiche);
-                    $lignehf->setFiche($fiche);
                     $lignehf->setEtat($etat);
-                } else {
+                } else { //Sinon on créer une nouvelle fiche
                     $newFiche = new Fiche();
 
                     $newFiche->setEtat($etat);
@@ -77,13 +80,16 @@ class LigneHfController extends AbstractController
                     $newFiche->setMois(date('m'));
                     $newFiche->setAnnee(date('Y'));
 
+                    $lignehf->setFiche($newFiche);
+                    $lignehf->setEtat($etat);
+
                     $entityManager->persist($newFiche);
                     $entityManager->flush();
                 }
 
                 $entityManager->persist($lignehf);
                 $entityManager->flush();
-            } else {
+            } else { // Si la date va plus loin que la date du jours
                 $this->addFlash(
                     'error',
                     "La date ne peut pas être supérieur à la date d'aujourd'hui !"
