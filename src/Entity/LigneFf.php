@@ -43,7 +43,7 @@ class LigneFf
     private $typeFF;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FraisForfait", inversedBy="ligneFf")
+     * @ORM\OneToMany(targetEntity="App\Entity\FraisForfait", mappedBy="ligneFf", fetch="EAGER",cascade={"persist"})
      */
     private $fraisForfait;
 

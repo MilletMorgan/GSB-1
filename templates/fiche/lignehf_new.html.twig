@@ -4,7 +4,21 @@
 	{#    {% if is_granted(expression('"ROLE_ADMIN" in roles')) %}#}
 	<div class="card my-card">
 		<div class="card-body">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success" role="alert">
+					<div class="flash-notice">
+						{{ message }}
+					</div>
+				</div>
+			{% endfor %}
 
+			{% for message in app.flashes('error') %}
+				<div class="alert alert-danger" role="alert">
+					<div class="flash-notice">
+						{{ message }}
+					</div>
+				</div>
+			{% endfor %}
 			<div class="form-card container">
 				<h3>Ligne Hors Forfait</h3>
 

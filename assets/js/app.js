@@ -8,10 +8,13 @@
 // any CSS you require will output into a single css file (app.css in this case)
 // require('../css/app.scss');
 
+import '../scss/app.scss';
+
 require('../css/demo_1/style.css');
 require('../css/style.css');
 
-import '../css/app.scss';
+
+
 
 const imagesContext = require.context('../images', true, /\.(png|jpg|jpeg|gif|ico|svg|webp)$/);
 imagesContext.keys().forEach(imagesContext);

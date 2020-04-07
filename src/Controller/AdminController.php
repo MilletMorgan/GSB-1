@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\UserType;
 
 class AdminController extends AbstractController
 {
@@ -28,5 +31,36 @@ class AdminController extends AbstractController
             'Users' => $User
         ));
 
+    }
+
+    /**
+     * @Route("/user/{userId}", name="editUser")
+     * @param $id
+     * @param Request $request
+     */
+    public function edit($userId, UserRepository $userRepository, Request $request)
+    {
+        $User = $userRepository->find($userId);
+        $form = $this->createForm(UserType::class, $User);
+
+        if (!$User)
+        {
+            throw $this->createNotFoundException(
+                'Utilisateur introuvable pour '.$userId
+            );
+        }
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $User = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($User);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('admin/edit.html.twig', ['form'=>$form->createView()]);
     }
 }
