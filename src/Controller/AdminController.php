@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\UserType;
 
+
 class AdminController extends AbstractController
 {
     /**
@@ -62,5 +63,19 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/edit.html.twig', ['form'=>$form->createView()]);
+    }
+
+    /**
+     * @Route("/supprUser/{id}", name="deleteUser")
+     */
+    public function delete($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $User = $entityManager->getRepository(User::class)->find($id);
+
+        $entityManager->remove($User);
+        $entityManager->flush();
+
+        return $this->redirect($this->generateUrl('admin/liste.html.twig'));
     }
 }
