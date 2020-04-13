@@ -29,7 +29,7 @@ class FraisForfait
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\LigneFf", inversedBy="fraisForfait")
+     * @ORM\OneToOne(targetEntity="App\Entity\LigneFf", inversedBy="fraisForfait")
      */
     private $ligneFf;
 

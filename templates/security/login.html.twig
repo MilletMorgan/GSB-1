@@ -3,47 +3,51 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-	{% if app.user %}
-		<div class="mb-3">
-			You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-		</div>
+    {% if app.user %}
+        <div class="card my-card">
+            <div class="card-body">
+                <div class="mb-3">
+                    Vous êtes connecter en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                </div>
+            </div>
+        </div>
 
-	{% else %}
-		<div class="card my-card">
-			<div class="card-body">
-				<div class="form-card container">
-					{% if error %}
-						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-					{% endif %}
-					<form method="post">
+    {% else %}
+        <div class="card my-card">
+            <div class="card-body">
+                <div class="form-card container">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <form method="post">
 
-						<h1 class="text-center">Connexion</h1>
-						<div class="row">
-							<div class="col-md-6 form-group">
-								<label for="inputEmail" class="sr-only">Email</label>
-								<input type="email" value="{{ last_username }}" name="email" id="inputEmail"
-									   class="form-control"
-									   placeholder="Email" required autofocus>
-							</div>
-							<div class="col-md-6 form-group">
-								<label for="inputPassword" class="sr-only">Password</label>
-								<input type="password" name="password" id="inputPassword" class="form-control"
-									   placeholder="Password"
-									   required>
+                        <h1 class="text-center">Connexion</h1>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="inputEmail" class="sr-only">Email</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                                       class="form-control"
+                                       placeholder="Email" required autofocus>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="inputPassword" class="sr-only">Password</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control"
+                                       placeholder="Password"
+                                       required>
 
-							</div>
-						</div>
+                            </div>
+                        </div>
 
-						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-						<button type="submit" class="btn1 btn-primary btn-lg btn-block btn-dark">Se connecter</button>
+                        <button type="submit" class="btn1 btn-primary btn-lg btn-block btn-dark">Se connecter</button>
 
-					</form>
-				</div>
-			</div>
-		</div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-	{% endif %}
+    {% endif %}
 
 
 {% endblock %}

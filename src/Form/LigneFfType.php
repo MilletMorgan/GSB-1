@@ -14,28 +14,30 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LigneFfType extends AbstractType
 {
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder
-			->add('dateFFrais', DateType::class, [
-				'widget' => 'single_text',
-			])
-			->add('quantite', IntegerType::class)
-			->add('typeFF', EntityType::class, [
-				'class' => TypeFF::class
-			])
-			->add('fraisForfait', CollectionType::class, array(
-				'entry_type' => FraisForfaitType::class,
-				'allow_add' => true,
-				'entry_options' => ['label' => false],
-				'label' => false
-			));
-	}
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('dateFFrais', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add('quantite', IntegerType::class)
+            ->add('typeFF', EntityType::class, [
+                'class' => TypeFF::class
+            ])
+            ->add('label')
+            ->add('prix');
+//			->add('fraisForfait', CollectionType::class, array(
+//				'entry_type' => FraisForfaitType::class,
+//				'allow_add' => true,
+//				'entry_options' => ['label' => false],
+//				'label' => false
+//			));
+    }
 
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults([
-			'data_class' => LigneFf::class,
-		]);
-	}
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => LigneFf::class,
+        ]);
+    }
 }

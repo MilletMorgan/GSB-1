@@ -17,6 +17,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class LigneHfController
+ * @package App\Controller
+ * @Route("/visiteur")
+ */
 class LigneHfController extends AbstractController
 {
     private $logger;

@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="card my-card mb-5">
+        <div class="card-body text-center">
+            <h1>Listes des fiches frais</h1>
+        </div>
+    </div>
+
+    <div class="card my-card mb-5">
+        <div class="card-body">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                    <div class="flash-notice">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+            <h2>Ligne frais forfait de l'utilisateur</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">LIGNEFF ID</th>
+                    <th scope="col">DATE FRAIS</th>
+                    <th scope="col">LABEL</th>
+                    <th scope="col">MONTANT</th>
+                    <th scope="col">ETAT</th>
+                    <th scope="col">ACTIONS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ligneFf in ligneFfs %}
+                    <tr>
+                        <td>{{ ligneFf.id }}</td>
+                        <td>{{ ligneFf.dateFFrais|date("d/m/Y") }}</td>
+                        <td>{{ ligneFf.label }}</td>
+                        <td>{{ ligneFf.prix }} €</td>
+                        <td>{{ ligneFf.etat.label }}</td>
+                        <td>
+                            <a type="button" class="btn btn-danger"
+                               href="{{ path('deleteFicheFrais', {id:ligneFf.id} ) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card my-card">
+        <div class="card-body">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                    <div class="flash-notice">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+            <h2>Ligne hors forfait de l'utilisateur</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">LIGNEHF ID</th>
+                    <th scope="col">DATE FRAIS</th>
+                    <th scope="col">LABEL</th>
+                    <th scope="col">MONTANT</th>
+                    <th scope="col">ETAT</th>
+                    <th scope="col">ACTIONS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ligneHf in ligneHfs %}
+                    <tr>
+                        <td>{{ ligneHf.id }}</td>
+                        <td>{{ ligneHf.dateFrais|date("d/m/Y") }}</td>
+                        <td>{{ ligneHf.label }}</td>
+                        <td>{{ ligneHf.montant }} €</td>
+                        <td>{{ ligneHf.etat.label }}</td>
+                        <td>
+                            {#                            <a type="button" class="btn btn-primary"#}
+                            {#                               href="{{ path('showFicheFrais', {id:ligneHf.id}) }}">Voir</a>#}
+                            {#                            <a type="button" class="btn btn-secondary"#}
+                            {#                               href="{{ path('editFicheFrais', {id:ligneHf.id}) }}">Editer</a>#}
+                            <a type="button" class="btn btn-danger"
+                               href="{{ path('deleteFicheFrais', {id:ligneHf.id} ) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+

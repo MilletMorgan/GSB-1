@@ -41,6 +41,17 @@
 						{{ form_label(form.dateModif, 'Date modification') }}
 						{{ form_widget(form.dateModif, { 'attr': {'class': 'form-control'} }) }}
 					</div>
+
+					<div class="form-group">
+						{{ form_label(form.label, 'Label') }}
+						{{ form_widget(form.label, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+
+					<div class="form-group">
+						{{ form_label(form.prix, 'Prix') }}
+						{{ form_widget(form.prix, { 'attr': {'class': 'form-control'} }) }}
+					</div>
 				</div>
 
 				<button type="submit" class="btn btn-primary">Fiche frais</button>

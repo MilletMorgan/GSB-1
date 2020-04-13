@@ -43,14 +43,24 @@ class LigneFf
     private $typeFF;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FraisForfait", mappedBy="ligneFf", fetch="EAGER",cascade={"persist"})
+     * @ORM\Column(type="string", length=255)
      */
-    private $fraisForfait;
+    private $label;
 
-	public function __construct()
-	{
-		$this->fraisForfait = new ArrayCollection();
-	}
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prix;
+
+//    /**
+//     * @ORM\OneToOne(targetEntity="App\Entity\FraisForfait", mappedBy="ligneFf", fetch="EAGER", cascade={"persist"})
+//     */
+//    private $fraisForfait;
+
+    public function __construct()
+    {
+//        $this->fraisForfait = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,15 +127,39 @@ class LigneFf
         return $this;
     }
 
-    public function getFraisForfait(): ArrayCollection
+    public function getLabel(): ?string
     {
-        return $this->fraisForfait;
+        return $this->label;
     }
 
-    public function setFraisForfait(?fraisForfait $fraisForfait): self
+    public function setLabel(string $label): self
     {
-        $this->fraisForfait = $fraisForfait;
+        $this->label = $label;
 
         return $this;
     }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+//    public function getFraisForfait(): ArrayCollection
+//    {
+//        return $this->fraisForfait;
+//    }
+//
+//    public function setFraisForfait(?fraisForfait $fraisForfait): self
+//    {
+//        $this->fraisForfait = $fraisForfait;
+//
+//        return $this;
+//    }
 }

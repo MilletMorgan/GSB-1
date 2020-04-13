@@ -1,7 +1,9 @@
 <component name="ProjectDictionaryState">
   <dictionary name="mille">
     <words>
+      <w>administrateur</w>
       <w>adminliste</w>
+      <w>comptable</w>
       <w>etat</w>
       <w>fichefrais</w>
       <w>forfait</w>
@@ -17,6 +19,7 @@
       <w>prix</w>
       <w>quantite</w>
       <w>valider</w>
+      <w>visiteur</w>
     </words>
   </dictionary>
 </component>

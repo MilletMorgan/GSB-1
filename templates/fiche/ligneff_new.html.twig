@@ -57,8 +57,15 @@
 					</div>
 
 
-					<div class="fiche form-group"
-						 data-prototype="{{ form_widget(form.fraisForfait.vars.prototype)|e('html_attr') }}">
+					<div class="form-group">
+						{{ form_label(form.label, 'Label') }}
+						{{ form_widget(form.label, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+
+					<div class="form-group">
+						{{ form_label(form.prix, 'Prix') }}
+						{{ form_widget(form.prix, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 
 

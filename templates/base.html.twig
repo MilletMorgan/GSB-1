@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<title>{% block title %}Welcome!{% endblock %}</title>
-	{% block stylesheets %}
-		{{ encore_entry_link_tags('app') }}
-		<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Patua+One&display=swap" rel="stylesheet">
-		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
-			  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-			  crossorigin="anonymous">
-	{% endblock %}
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Patua+One&display=swap" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+              crossorigin="anonymous">
+    {% endblock %}
 
 
 </head>
@@ -32,51 +32,75 @@
 
 <div class="main-wrapper">
 
-	<!-- partial:partials/_sidebar.html -->
-	<nav class="sidebar">
-		<div class="sidebar-header">
-			<a href="{{ path('app_homepage') }}" class="sidebar-brand">
-				GSB
-			</a>
-		</div>
-		<div class="sidebar-body">
-			<ul class="nav">
-				<li class="nav-item">
-					<a href="{{ path('app_login') }}" class="nav-link">Connexion</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{ path('user_new') }}" class="nav-link">Créer un utilisateur</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{ path('app_logout') }}" class="nav-link">Deconnexion</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{ path('ligneff') }}" class="nav-link">Ligne frais forfait</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{ path('lignehf') }}" class="nav-link">Ligne hors forfait</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{ path('adminliste') }}" class="nav-link">Liste des admins</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	<!-- partial -->
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <a href="{{ path('app_homepage') }}" class="sidebar-brand">
+                GSB
+            </a>
+        </div>
+        <div class="sidebar-body">
+            <ul class="nav">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li>
+                        <h3>Bonjour {{ app.user.prenom }}</h3>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('app_logout') }}" class="nav-link">Deconnexion</a>
+                    </li>
+                    <hr>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{ path('app_login') }}" class="nav-link">Connexion</a>
+                    </li>
+                    <hr>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a href="{{ path('user_new') }}" class="nav-link">Créer un utilisateur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('adminliste') }}" class="nav-link">Liste des utilisateurs</a>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_VISITEUR') %}
+                    <li class="nav-item">
+                        <a href="{{ path('ligneff') }}" class="nav-link">Ligne frais forfait</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('lignehf') }}" class="nav-link">Ligne hors forfait</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('showAllFiches') }}" class="nav-link">Listes des fiches créer</a>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_COMPTABLE') %}
+                    <li class="nav-item">
+                        <a href="{{ path('new-type') }}" class="nav-link">Création type FF</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('showAllFichesComptable') }}" class="nav-link">Listes des fiches
+                            créer</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!-- partial -->
 
-	<div class="page-wrapper">
-		<div class="page-content">
-			{% block body %}{% endblock %}
-		</div>
-	</div>
+    <div class="page-wrapper">
+        <div class="page-content">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
 </div>
 {% block javascripts %}
-	{{ encore_entry_script_tags('app') }}
-	<script
-			src="https://code.jquery.com/jquery-3.4.1.min.js"
-			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			crossorigin="anonymous">
-	</script>
+    {{ encore_entry_script_tags('app') }}
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous">
+    </script>
 {% endblock %}
 </body>
 </html>

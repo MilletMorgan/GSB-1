@@ -1,40 +1,46 @@
 {% extends 'base.html.twig' %}
 {% block title %} Admin {% endblock %}
 {% block body %}
-    <h1 style="font-weight: bold; text-align: center; ">GERER LES UTILISATEURS</h1>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Prenom</th>
-            <th scope="col">Adresse</th>
-            <th scope="col">e-mail</th>
-            <th scope="col">Rôle</th>
-            <th scope="col">Options supplémentaire</th>
+    <div class="card my-card">
+        <div class="card-body">
+            <h1 style="font-weight: bold; text-align: center; ">GERER LES UTILISATEURS</h1>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">e-mail</th>
+                    <th scope="col">Rôle</th>
+                    <th scope="col">Options supplémentaire</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        {% for User in Users %}
-        <tr>
-            <th scope="row">
-                {{ User.id }}
+                </tr>
+                </thead>
+                <tbody>
+                {% for User in Users %}
+                    <tr>
+                        <th scope="row">
+                            {{ User.id }}
 
-            </th>
-            <td>{{ User.nom }}</td>
-            <td>{{ User.prenom }}</td>
-            <td>{{ User.adresse }}</td>
-            <td>{{ User.email }}</td>
-            <td>{{ User.roles ? User.roles|join(', ') : '' }}</td>
-            <td><a type="button" class="btn btn-secondary" href="{{ path('editUser', {userId:User.id}) }}">Editer</a>
-            <a type="button" class="btn btn-secondary" href="{{ path('deleteUser', {id:User.id} ) }}">Supprimer</a></td>
+                        </th>
+                        <td>{{ User.nom }}</td>
+                        <td>{{ User.prenom }}</td>
+                        <td>{{ User.adresse }}</td>
+                        <td>{{ User.email }}</td>
+                        <td>{{ User.roles ? User.roles|join(', ') : '' }}</td>
+                        <td><a type="button" class="btn btn-primary"
+                               href="{{ path('editUser', {userId:User.id}) }}">Editer</a>
+                            <a type="button" class="btn btn-danger"
+                               href="{{ path('deleteUser', {id:User.id} ) }}">Supprimer</a></td>
 
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% endblock %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
 
 
 

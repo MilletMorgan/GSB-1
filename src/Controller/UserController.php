@@ -13,10 +13,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class UserController
+ * @package App\Controller
+ * @Route("/admin")
+ */
 class UserController extends AbstractController
 {
 	/**
-	 * @Route("/user-new", name="user_new")
+	 * @Route("/new", name="user_new")
 	 * @param Request $request
 	 * @param UserPasswordEncoderInterface $passwordEncoder
 	 * @return RedirectResponse|Response
