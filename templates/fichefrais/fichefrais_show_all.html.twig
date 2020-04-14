@@ -20,6 +20,48 @@
                     </div>
                 </div>
             {% endfor %}
+            <h2>FICHE</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">LIGNEFF ID</th>
+                    <th scope="col">DATE FRAIS</th>
+                    <th scope="col">LABEL</th>
+                    <th scope="col">MONTANT</th>
+                    <th scope="col">ETAT</th>
+                    <th scope="col">ACTIONS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fiche in fiches %}
+                    <tr>
+                        <td>{{ fiche.id }}</td>
+{#                        <td>{{ fiche.dateFFrais|date("d/m/Y") }}</td>#}
+                        {% for lignehf in fiche %}
+                            <td>{{ ligneHf }}</td>
+                        {% endfor %}
+{#                        <td>{{ fiche.prix }} €</td>#}
+{#                        <td>{{ fiche.etat.label }}</td>#}
+{#                        <td>#}
+{#                            <a type="button" class="btn btn-danger"#}
+{#                               href="{{ path('deleteFicheFrais', {id:fiche.id} ) }}">Supprimer</a>#}
+{#                        </td>#}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card my-card mb-5">
+        <div class="card-body">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                    <div class="flash-notice">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
             <h2>Ligne frais forfait de l'utilisateur</h2>
             <table class="table table-striped">
                 <thead>

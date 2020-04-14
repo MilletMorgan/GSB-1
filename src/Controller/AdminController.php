@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\UserType;
 
 /**
- * @Route("/admin")
+// * @Route("/admin")
  */
 class AdminController extends AbstractController
 {

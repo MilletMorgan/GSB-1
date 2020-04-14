@@ -10,7 +10,9 @@ use App\Entity\LigneFf;
 use App\Entity\LigneHf;
 use App\Entity\TypeFF;
 use App\Entity\User;
+use App\Entity\Vehicule;
 use App\Form\TypeFFType;
+use App\Form\VehiculeType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,8 +55,7 @@ class ComptableController extends AbstractController
     /**
      * @Route("/show-all-fiches", name="showAllFichesComptable")
      */
-    public
-    function showAll()
+    public function showAll()
     {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
@@ -90,8 +91,7 @@ class ComptableController extends AbstractController
      * @param $id
      * @return RedirectResponse
      */
-    public
-    function delete($id)
+    public function delete($id)
     {
         $ligneFf = $this->getDoctrine()->getRepository(LigneFf::class)->find($id);
         $ligneHf = $this->getDoctrine()->getRepository(LigneHf::class)->find($id);
@@ -124,8 +124,7 @@ class ComptableController extends AbstractController
      * @param $etat
      * @return Response
      */
-    public
-    function etatFicheFrais($id, $etat)
+    public function etatFicheFrais($id, $etat)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -156,5 +155,52 @@ class ComptableController extends AbstractController
         );
 
         return $this->redirectToRoute('showAllFichesComptable');
+    }
+
+    /**
+     * @Route("/add-vehicule", name="addVehicule")
+     * @param Request $request
+     * @return Response
+     */
+    public function addVehicule(Request $request)
+    {
+        $vehicule = new Vehicule();
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(VehiculeType::class, $vehicule);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($vehicule);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('showAllFichesComptable');
+        }
+
+        return $this->render('comptable/vehicule_new.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * @Route("/show-vehicule-affecter", name="show-vehicule-affecter")
+     * @return Response
+     */
+    public function showVehiculeAffecter()
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+
+        $repository = $this->getDoctrine()->getRepository(Vehicule::class);
+
+        $vehicules = $repository->findBy([
+            'utilisateur' => $user
+        ]);
+
+        return $this->render('comptable/vehicule_show_all.html.twig', [
+            'vehicules' => $vehicules,
+        ]);
     }
 }

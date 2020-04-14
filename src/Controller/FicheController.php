@@ -92,7 +92,6 @@ class FicheController extends AbstractController
             'user' => $user
         ]);
 
-
         $ligneFfRepository = $this->getDoctrine()->getRepository(LigneFf::class);
         $ligneHfRepository = $this->getDoctrine()->getRepository(LigneHf::class);
 
@@ -107,7 +106,8 @@ class FicheController extends AbstractController
 
         return $this->render('fichefrais/fichefrais_show_all.html.twig', [
             'ligneFfs' => $ligneFf,
-            'ligneHfs' => $ligneHf
+            'ligneHfs' => $ligneHf,
+            'fiches' => $fiches,
         ]);
     }
 

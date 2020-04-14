@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="card my-card mb-5">
+        <div class="card-body text-center">
+            <h1>Listes des fiches frais</h1>
+        </div>
+    </div>
+
+    <div class="card my-card mb-5">
+        <div class="card-body">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                    <div class="flash-notice">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+            <h2>Liste des utilisateurs affecté à un vehicule</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOM DU VEHICULE</th>
+                    <th scope="col">UTILISATEUR AFFECTER</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for vehicule in vehicules %}
+                    <tr>
+                        <td>{{ vehicule.id }}</td>
+                        <td>{{ vehicule.nomVehicule }}</td>
+                        <td>{{ vehicule.utilisateur.username }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+
